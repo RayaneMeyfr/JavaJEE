@@ -10,10 +10,10 @@
 <html>
 <head>
     <title>Trans Firts</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <jsp:include page="../WEB-INF/link-coposant.jsp" />
 </head>
 <body>
-    <jsp:include page="../WEB-INF/composant.jsp" />
+    <jsp:include page="../WEB-INF/nav-bar-coposant.jsp" />
     <p>Bonjour ${nom}</p>
 </body>
 </html>
