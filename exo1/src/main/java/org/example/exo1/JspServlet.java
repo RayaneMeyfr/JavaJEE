@@ -11,6 +11,6 @@ import java.io.IOException;
 @WebServlet(name = "jspServlet", value = "/jsproute")
 public class JspServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        getServletContext().getRequestDispatcher("/jspTest.jsp").forward(request, response);
+        getServletContext().getRequestDispatcher("/view/jspTest.jsp").forward(request, response);
     }
 }
