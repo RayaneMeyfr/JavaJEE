@@ -26,30 +26,19 @@ public class ChienServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String servletPath = request.getServletPath();
 
-        if ("/chien/add".equals(servletPath)) {
-            request.getRequestDispatcher("/WEB-INF/chien/add.jsp").forward(request, response);
-        } else if ("/chien/details".equals(servletPath)) {
-            String idParam = request.getParameter("id");
-            if (idParam != null) {
-                try {
-                    int id = Integer.parseInt(idParam);
-                    Chien chien = serviceChien.getChienById(id);
-                    if (chien != null) {
-                        request.setAttribute("chien", chien);
-                        request.getRequestDispatcher("/WEB-INF/chien/details.jsp").forward(request, response);
-                    }
-                } catch (NumberFormatException e) {
-                    e.printStackTrace();
-                }
-            }
-            response.sendRedirect(request.getContextPath() + "/chien");
-        } else {
-            request.setAttribute("chienList", serviceChien.getAll());
-            request.getRequestDispatcher("/WEB-INF/chien/list.jsp").forward(request, response);
+        switch (servletPath) {
+            case "/chien/add":
+                this.add(request, response);
+                break;
+            case "/chien/details":
+                this.details(request, response);
+                break;
+            default:
+                this.list(request, response);
+                break;
         }
     }
-
-
+    
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String name = req.getParameter("name");
@@ -61,5 +50,30 @@ public class ChienServlet extends HttpServlet {
         resp.sendRedirect(getServletContext().getContextPath()+"/chien");
     }
 
+    public void add(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/chien/add.jsp").forward(req, resp);
+    }
+
+    public void details(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        String idParam = request.getParameter("id");
+        if (idParam != null) {
+            try {
+                int id = Integer.parseInt(idParam);
+                Chien chien = serviceChien.getChienById(id);
+                if (chien != null) {
+                    request.setAttribute("chien", chien);
+                    request.getRequestDispatcher("/WEB-INF/chien/details.jsp").forward(request, response);
+                }
+            } catch (NumberFormatException e) {
+                e.printStackTrace();
+            }
+        }
+        response.sendRedirect(request.getContextPath() + "/chien");
+    }
+
+    public void list(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("chienList", serviceChien.getAll());
+        request.getRequestDispatcher("/WEB-INF/chien/list.jsp").forward(request, response);
+    }
 
 }
