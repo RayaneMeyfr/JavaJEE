@@ -37,7 +37,6 @@ public class ChienServlet extends HttpServlet {
                     if (chien != null) {
                         request.setAttribute("chien", chien);
                         request.getRequestDispatcher("/WEB-INF/chien/details.jsp").forward(request, response);
-                        return;
                     }
                 } catch (NumberFormatException e) {
                     e.printStackTrace();
