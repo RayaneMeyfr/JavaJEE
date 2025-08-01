@@ -11,4 +11,6 @@ public interface IServiceChien {
     void addChien(Chien chien);
 
     Chien getChienById(int id);
+
+    void delete(Chien chien);
 }
