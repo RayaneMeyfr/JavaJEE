@@ -31,7 +31,7 @@ public class VoitureResource {
         return this.voitureService.getVoitures();
     }
 
-    @POST
+    @GET
     @Path("/create")
     public Voiture createVoiture(
             @QueryParam("marque")String marque,
